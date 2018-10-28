@@ -4,7 +4,7 @@ from tkinter import *
 
 # Reading User input
 master = Tk()
-
+master.title("Input")
 Label(master, text="x0").grid(row=0), Label(master, text="y0").grid(row=1),
 Label(master, text="X").grid(row=2), Label(master, text="n").grid(row=3)
 
@@ -20,7 +20,7 @@ def onclick(event):
     master.quit()
 
 master.bind('<Return>', onclick)
-Button(master, text='Show graphs', command = master.quit).grid(row=4, column=0, sticky=W, pady=4)
+Button(master, text='Show graphs', command = master.quit).grid(row=4, column=0, sticky=W+E, pady=4)
 master.mainloop( )
 
 # Numerical Methods
