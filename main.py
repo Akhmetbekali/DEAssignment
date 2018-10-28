@@ -1,11 +1,27 @@
 import numpy as np
 from matplotlib import pyplot as plt
+from tkinter import *
 
 # Reading User input
-xi = float(input("Enter x0: "))
-yi = float(input("Enter yi: "))
-Xf = float(input("Enter X: "))
-num = int(input("Enter n: "))
+master = Tk()
+
+Label(master, text="x0").grid(row=0), Label(master, text="y0").grid(row=1),
+Label(master, text="X").grid(row=2), Label(master, text="n").grid(row=3)
+
+e1 = Entry(master)
+e2 = Entry(master)
+e3 = Entry(master)
+e4 = Entry(master)
+
+e1.grid(row=0, column=1), e2.grid(row=1, column=1),
+e3.grid(row=2, column=1), e4.grid(row=3, column=1)
+
+def onclick(event):
+    master.quit()
+
+master.bind('<Return>', onclick)
+Button(master, text='Show graphs', command = master.quit).grid(row=4, column=0, sticky=W, pady=4)
+master.mainloop( )
 
 # Numerical Methods
 def euler(x0, y0, X, n):
@@ -95,10 +111,10 @@ def error_rk(rk_x, rk_y, exact_x, exact_y):
     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, prop={'size': 5.5}, borderaxespad=0.)
 
 # Displaying of Methods and Errors
-ivp_x, ivp_y = IVP(xi, yi, Xf, num)
-e_x, e_y = euler(xi, yi, Xf, num)
-ie_x, ie_y = improved_euler(xi, yi, Xf, num)
-rk_x, rk_y = runge_kutta(xi, yi, Xf, num)
+ivp_x, ivp_y = IVP(float(e1.get()), float(e2.get()),float(e3.get()), int(e4.get()))
+e_x, e_y = euler(float(e1.get()), float(e2.get()),float(e3.get()), int(e4.get()))
+ie_x, ie_y = improved_euler(float(e1.get()), float(e2.get()),float(e3.get()), int(e4.get()))
+rk_x, rk_y = runge_kutta(float(e1.get()), float(e2.get()),float(e3.get()), int(e4.get()))
 
 error_euler(e_x, e_y, ivp_x, ivp_y)
 error_improved_euler(ie_x, ie_y, ivp_x, ivp_y)
